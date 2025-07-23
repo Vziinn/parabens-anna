@@ -429,15 +429,7 @@
 
 
         /* Estilos para responsividade */
-        @media (max-width: 480px) {
-    /* ... outras regras de estilo ... */
-    #main-title {
-        font-size: 1.8em; /* Reduz o tamanho da fonte para celular */
-        word-break: break-word; /* Ajuda a quebrar palavras longas se necessário */
-        /* O white-space: normal será aplicado pelo JavaScript após a digitação */
-    }
-    /* ... outras regras de estilo ... */
-}
+        @media (max-width: 768px) {
             h1 {
                 font-size: 2em;
             }
@@ -543,7 +535,7 @@
 
     <div class="playlist">
         <p>Outras músicas que me lembram você:</p>
-        <iframe width="100%" height="152" src="http://googleusercontent.com/youtube.com/embed/t-C9B-M4e8A" title="Jorge & Mateus - Os Anjos Cantam (LyricVideo) [Álbum Os Anjos Cantam]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6ccKu0LwJzOhLAxBwP2PTk?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6ccKu0LwJzOhLAxBwP2PTk?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
 
     <footer>
@@ -655,15 +647,15 @@
                     mainTitleElement.textContent += originalTitleText.charAt(charIndex);
                     charIndex++;
                     setTimeout(typeWriter, 100); // Velocidade de digitação (ms por caractere)
-               } else {
-            // Após a digitação, permite que o texto quebre a linha se for celular, e remove o cursor
-            if (window.innerWidth <= 480) { // Se a largura da janela for menor ou igual a 480px (celular)
-                mainTitleElement.style.whiteSpace = 'normal'; // Permite que o texto quebre a linha
-            } 
-            mainTitleElement.style.borderRight = 'none'; // Remove o cursor
-            // A animação de digitação principal continua ativa, mas o white-space agora permite a quebra.
-            mainTitleElement.style.animation = `typing 3.5s steps(${originalTitleText.length}, end) forwards`; 
-        }
+                } else {
+                    mainTitleElement.style.animation = 'typing 3.5s steps(40, end) forwards';
+                    // Inicia fadeIn dos outros elementos após o typewriter ter uma boa parte digitada
+                    document.querySelector('.subtitle').style.animationDelay = '0s'; // Já tem um atraso relativo no CSS
+                    document.querySelector('.photo').style.animationDelay = '0.2s';
+                    document.querySelector('.text').style.animationDelay = '0.4s';
+                    document.querySelector('.music-player').style.animationDelay = '0.6s';
+                    document.querySelector('.playlist').style.animationDelay = '0.8s';
+                    document.querySelector('footer').style.animationDelay = '1s';
                 }
             }
 
