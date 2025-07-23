@@ -6,7 +6,7 @@
     <title>Para Anna – Com todo o meu amor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link <link rel="icon" type="image/png" href="meu_favicon.png">
+    <link rel="icon" type="image/png" href="favicon.png">
 
     <link rel="preconnect" href="http://googleusercontent.com/fonts.gstatic.com/0" crossorigin>
     <link href="http://googleusercontent.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -33,17 +33,17 @@
         }
         h1 {
             font-family: 'Playfair Display', serif; /* Fonte para o título principal */
-            font-size: 2.8em; /* Aumentado para dar mais destaque */
+            font-size: 2.8em; 
             color: #ffcccc; 
             margin-bottom: 0;
-            animation: fadeIn 1s ease-out forwards; /* Animação */
+            animation: fadeIn 1s ease-out forwards; 
         }
         .subtitle {
             font-family: 'Playfair Display', serif; /* Fonte para o subtítulo */
-            font-size: 1.4em; /* Aumentado */
+            font-size: 1.4em; 
             color: #ff9999; 
             margin-top: 5px;
-            animation: fadeIn 1s ease-out 0.2s forwards; /* Animação com delay */
+            animation: fadeIn 1s ease-out 0.2s forwards; 
         }
         .photo {
             max-width: 300px;
@@ -53,19 +53,30 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             margin: 20px auto;
             display: block;
-            animation: fadeIn 1s ease-out 0.4s forwards; /* Animação com delay */
+            animation: fadeIn 1s ease-out 0.4s forwards; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição para hover */
+        }
+        .photo:hover {
+            transform: translateY(-5px); /* Leve levantamento no hover */
+            box-shadow: 0 8px 15px rgba(0,0,0,0.5); /* Sombra mais forte no hover */
         }
         .text {
             text-align: left;
             max-width: 600px;
             margin: 0 auto 30px;
-            line-height: 1.6em; /* Levemente aumentado para melhor leitura */
+            line-height: 1.6em; 
             background: rgba(255, 255, 255, 0.15); 
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
             color: #eee;
-            animation: fadeIn 1s ease-out 0.6s forwards; /* Animação com delay */
+            animation: fadeIn 1s ease-out 0.6s forwards; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; /* Transição para hover */
+        }
+        .text:hover {
+            transform: translateY(-5px); /* Leve levantamento no hover */
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3); /* Sombra mais forte no hover */
+            background: rgba(255, 255, 255, 0.25); /* Fundo ligeiramente mais opaco */
         }
         .music-player {
             margin: 30px auto;
@@ -79,12 +90,13 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 10px;
-            animation: fadeIn 1s ease-out 0.8s forwards; /* Animação com delay */
+            animation: fadeIn 1s ease-out 0.8s forwards; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; /* Transição para hover */
         }
-        .music-player audio {
-            width: 100%;
-            max-width: 400px;
-            height: 40px;
+        .music-player:hover {
+            transform: translateY(-5px); /* Leve levantamento no hover */
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3); /* Sombra mais forte no hover */
+            background: rgba(255, 255, 255, 0.25); /* Fundo ligeiramente mais opaco */
         }
         .playlist {
             margin: 30px auto;
@@ -94,27 +106,46 @@
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
             color: #eee;
-            animation: fadeIn 1s ease-out 1s forwards; /* Animação com delay */
+            animation: fadeIn 1s ease-out 1s forwards; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; /* Transição para hover */
         }
-        .playlist iframe {
-            width: 100%; 
-            max-width: 500px; 
-            height: 152px; /* Ajustado para a altura do player do YouTube */
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
+        .playlist:hover {
+            transform: translateY(-5px); /* Leve levantamento no hover */
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3); /* Sombra mais forte no hover */
+            background: rgba(255, 255, 255, 0.25); /* Fundo ligeiramente mais opaco */
         }
         footer {
             margin-top: 50px;
             font-size: 0.9em;
             color: #ccc;
             padding-bottom: 20px;
-            animation: fadeIn 1s ease-out 1.2s forwards; /* Animação com delay */
+            animation: fadeIn 1s ease-out 1.2s forwards; 
         }
+
+        /* Estilos para o botão "Voltar ao Topo" */
+        #scrollToTopBtn {
+            display: none; /* Escondido por padrão */
+            position: fixed; /* Fixado na tela */
+            bottom: 20px; /* Distância do fundo */
+            right: 20px; /* Distância da direita */
+            z-index: 99; /* Acima de outros elementos */
+            border: none; /* Remove a borda */
+            outline: none; /* Remove o contorno ao focar */
+            background-color: rgba(255, 204, 204, 0.7); /* Rosa claro semi-transparente */
+            color: white; /* Cor da seta */
+            cursor: pointer; /* Cursor de clique */
+            padding: 15px; /* Espaçamento interno */
+            border-radius: 50%; /* Torna o botão redondo */
+            font-size: 18px; /* Tamanho da seta */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2); /* Sombra */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Transição para hover */
+        }
+
+        #scrollToTopBtn:hover {
+            background-color: rgba(255, 153, 153, 0.9); /* Rosa mais escuro no hover */
+            transform: translateY(-3px); /* Leve levantamento no hover */
+        }
+
         /* Estilos para responsividade */
         @media (max-width: 768px) {
             h1 {
@@ -128,6 +159,12 @@
             }
             .photo {
                 max-width: 250px;
+            }
+            #scrollToTopBtn {
+                padding: 12px;
+                font-size: 16px;
+                bottom: 15px;
+                right: 15px;
             }
         }
     </style>
@@ -178,12 +215,35 @@
 
     <div class="playlist">
         <p>Outras músicas que me lembram você:</p>
-        <iframe <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6ccKu0LwJzOhLAxBwP2PTk?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe width="100%" height="152" src="http://googleusercontent.com/youtube.com/embed/t-C9B-M4e8A" title="Jorge & Mateus - Os Anjos Cantam (LyricVideo) [Álbum Os Anjos Cantam]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
     <footer>
         <p>Criação especial para Anna. Sinta-se abraçada! 💛</p>
     </footer>
+
+    <button onclick="topFunction()" id="scrollToTopBtn" title="Voltar ao Topo">⬆️</button>
+
+    <script>
+        // Pega o botão
+        let mybutton = document.getElementById("scrollToTopBtn");
+
+        // Quando o usuário rola 20px para baixo a partir do topo do documento, mostra o botão
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // Quando o usuário clica no botão, rola para o topo do documento
+        function topFunction() {
+            window.scrollTo({top: 0, behavior: 'smooth'}); // Rola suavemente
+        }
+    </script>
 
 </body>
 </html>
