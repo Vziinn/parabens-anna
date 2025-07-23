@@ -282,6 +282,45 @@
             100% { transform: scale(1.1); }
         }
 
+        /* Estilos para a Entrada Cinematográfica (Novo) */
+        #cinematic-intro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000; /* Fundo preto para o efeito cinematográfico */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001; /* Acima do preloader */
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 1s ease-out, visibility 1s ease-out; /* Transição para sumir */
+        }
+
+        #cinematic-intro.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #intro-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 4em; /* Tamanho grande para o texto */
+            color: #ffcccc; /* Cor rosa claro */
+            opacity: 0; /* Começa invisível */
+            transform: scale(0.8); /* Começa um pouco menor */
+            animation: introTextReveal 2s ease-out forwards; /* Animação de revelação */
+            text-shadow: 0 0 15px rgba(255, 204, 204, 0.7); /* Efeito de brilho */
+        }
+
+        @keyframes introTextReveal {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.05); } /* Fica um pouco maior */
+            100% { opacity: 1; transform: scale(1); } /* Volta ao tamanho normal */
+        }
+
+
         /* Estilos para responsividade */
         @media (max-width: 768px) {
             h1 {
@@ -305,10 +344,17 @@
             .spinner-heart {
                 font-size: 40px; /* Menor em telas pequenas */
             }
+            #intro-text {
+                font-size: 2.5em; /* Menor em telas pequenas */
+            }
         }
     </style>
 </head>
 <body>
+
+    <div id="cinematic-intro">
+        <span id="intro-text">Feliz Aniversário, Anna!</span>
+    </div>
 
     <div id="preloader">
         <span class="spinner-heart">❤️</span>
@@ -360,7 +406,6 @@
     <div class="playlist">
         <p>Outras músicas que me lembram você:</p>
         <iframe <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6ccKu0LwJzOhLAxBwP2PTk?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
 
     <footer>
         <p>Criação especial para Anna. Sinta-se abraçada! 💛</p>
@@ -401,55 +446,79 @@
                 heart.remove();
             });
         }
-        // Inicia a criação de corações depois que o preloader sumir e o título terminar de digitar
-        setTimeout(() => {
-            setInterval(createHeart, 500); 
-        }, 5500); // Começa 5.5 segundos após o carregamento da página
+        // Os corações só começam a aparecer depois de TODAS as intros
+        let heartsInterval;
+        function startHearts() {
+            if (!heartsInterval) { // Garante que o intervalo só é criado uma vez
+                heartsInterval = setInterval(createHeart, 500); 
+            }
+        }
 
-        // Script para a tela de carregamento (Preloader) e início do efeito de digitação
+        // Script para a Entrada Cinematográfica, Preloader e Efeito de Digitação
         window.addEventListener('load', () => {
+            const cinematicIntro = document.getElementById('cinematic-intro');
             const preloader = document.getElementById('preloader');
-            if (preloader) {
-                preloader.classList.add('hidden');
-                preloader.addEventListener('transitionend', () => {
-                    preloader.remove();
-                    // Inicia o efeito de digitação APÓS o preloader sumir
-                    startTypewriter(); 
-                });
-            } else {
-                // Caso o preloader não exista por algum motivo, inicia direto
-                startTypewriter();
+            const mainTitleElement = document.getElementById('main-title');
+            const originalTitleText = 'Para Anna – Com todo o meu amor'; 
+            let charIndex = 0;
+
+            // 1. Inicia a Entrada Cinematográfica
+            setTimeout(() => {
+                if (cinematicIntro) {
+                    cinematicIntro.classList.add('hidden');
+                    cinematicIntro.addEventListener('transitionend', () => {
+                        cinematicIntro.remove();
+                        // 2. Após a Entrada Cinematográfica sumir, mostra o Preloader
+                        if (preloader) {
+                            preloader.classList.add('hidden');
+                            preloader.addEventListener('transitionend', () => {
+                                preloader.remove();
+                                // 3. Após o Preloader sumir, inicia o efeito de digitação
+                                startTypewriter();
+                                // 4. Inicia os corações flutuantes após um pequeno atraso do título
+                                setTimeout(startHearts, 1000); 
+                            });
+                        } else {
+                            // Se não houver preloader, vai direto para o typewriter
+                            startTypewriter();
+                            setTimeout(startHearts, 1000);
+                        }
+                    });
+                } else {
+                    // Se não houver cinematic intro, vai direto para o preloader
+                    if (preloader) {
+                        preloader.classList.add('hidden');
+                        preloader.addEventListener('transitionend', () => {
+                            preloader.remove();
+                            startTypewriter();
+                            setTimeout(startHearts, 1000);
+                        });
+                    } else {
+                        // Se não houver nenhum, inicia tudo direto
+                        startTypewriter();
+                        setTimeout(startHearts, 1000);
+                    }
+                }
+            }, 3000); // Duração da animação da entrada cinematográfica (3 segundos)
+
+            // Efeito de Digitação (Typewriter)
+            function typeWriter() {
+                if (charIndex < originalTitleText.length) {
+                    mainTitleElement.textContent += originalTitleText.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeWriter, 100); // Velocidade de digitação (ms por caractere)
+                } else {
+                    // Remove a animação de piscar do cursor após a digitação
+                    mainTitleElement.style.animation = 'typing 3.5s steps(40, end) forwards';
+                }
+            }
+
+            function startTypewriter() {
+                mainTitleElement.textContent = ''; 
+                charIndex = 0;
+                typeWriter(); 
             }
         });
-
-        // Efeito de Digitação (Typewriter)
-        const mainTitleElement = document.getElementById('main-title');
-        const originalTitleText = 'Para Anna – Com todo o meu amor'; 
-        let charIndex = 0;
-        let isTypingComplete = false;
-
-        function typeWriter() {
-            if (charIndex < originalTitleText.length) {
-                mainTitleElement.textContent += originalTitleText.charAt(charIndex);
-                charIndex++;
-                setTimeout(typeWriter, 100); // Velocidade de digitação (ms por caractere)
-            } else {
-                isTypingComplete = true;
-                // Remove a animação de piscar do cursor após a digitação
-                mainTitleElement.style.animation = 'typing 3.5s steps(40, end) forwards';
-            }
-        }
-
-        function startTypewriter() {
-            // Garante que o título esteja vazio antes de começar a digitar
-            mainTitleElement.textContent = ''; 
-            charIndex = 0;
-            isTypingComplete = false;
-            typeWriter(); // Inicia a digitação
-        }
-
-        // Ajusta o início das animações de fadeIn para os outros elementos
-        // Elas já estão com delay no CSS, mas o início será após o preloader/typewriter
     </script>
 
 </body>
