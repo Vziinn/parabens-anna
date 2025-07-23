@@ -5,8 +5,15 @@
     <title>Para Anna – Com todo o meu amor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="icon" type="image/png" href="meu_favicon.png">
+    <link rel="icon" type="image/png" href="favicon.png">
 
+    <meta property="og:title" content="Para Anna – Com todo o meu amor ❤️">
+    <meta property="og:description" content="Feliz 16 anos, Anna! Uma mensagem especial de carinho e amor eterno.">
+    <meta property="og:image" content="https://vziinn.github.io/parabens-anna/anna_foto.jpeg">
+    <meta property="og:url" content="https://vziinn.github.io/parabens-anna/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    
     <link rel="preconnect" href="http://googleusercontent.com/fonts.gstatic.com/0" crossorigin>
     <link href="http://googleusercontent.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     
@@ -203,6 +210,44 @@
             }
         }
 
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffecf0; /* Um rosa bem claro, quase branco */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Acima de tudo */
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .spinner-heart {
+            font-size: 60px; /* Tamanho do coração */
+            color: #ffcccc; /* Cor do coração */
+            animation: spin 1.5s linear infinite, pulse 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
         /* Estilos para responsividade */
         @media (max-width: 768px) {
             h1 {
@@ -223,10 +268,17 @@
                 bottom: 15px;
                 right: 15px;
             }
+            .spinner-heart {
+                font-size: 40px; /* Menor em telas pequenas */
+            }
         }
     </style>
 </head>
 <body>
+
+    <div id="preloader">
+        <span class="spinner-heart">❤️</span>
+    </div>
 
     <div class="heart-container"></div>
 
@@ -272,7 +324,7 @@
 
     <div class="playlist">
         <p>Outras músicas que me lembram você:</p>
-        <iframe <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6ccKu0LwJzOhLAxBwP2PTk?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe width="100%" height="152" src="http://googleusercontent.com/youtube.com/embed/t-C9B-M4e8A" title="Jorge & Mateus - Os Anjos Cantam (LyricVideo) [Álbum Os Anjos Cantam]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
     <footer>
@@ -282,10 +334,8 @@
     <button onclick="topFunction()" id="scrollToTopBtn" title="Voltar ao Topo">⬆️</button>
 
     <script>
-        // Pega o botão
+        // Script para o botão "Voltar ao Topo"
         let mybutton = document.getElementById("scrollToTopBtn");
-
-        // Quando o usuário rola 20px para baixo a partir do topo do documento, mostra o botão
         window.onscroll = function() {scrollFunction()};
 
         function scrollFunction() {
@@ -295,42 +345,40 @@
                 mybutton.style.display = "none";
             }
         }
-
-        // Quando o usuário clica no botão, rola para o topo do documento
         function topFunction() {
-            window.scrollTo({top: 0, behavior: 'smooth'}); // Rola suavemente
+            window.scrollTo({top: 0, behavior: 'smooth'}); 
         }
 
         // Script para os corações flutuantes
         const heartContainer = document.querySelector('.heart-container');
-
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
-            
-            // Tamanho aleatório para variar um pouco
-            const size = Math.random() * 20 + 10; // Corações de 10px a 30px
+            const size = Math.random() * 20 + 10; 
             heart.style.width = size + 'px';
             heart.style.height = size + 'px';
-            
-            // Posição inicial aleatória na largura da tela
             heart.style.left = Math.random() * 100 + 'vw';
-            
-            // Duração e delay da animação aleatórios para parecer mais natural
-            const duration = Math.random() * 8 + 8; // De 8 a 16 segundos
+            const duration = Math.random() * 8 + 8; 
             heart.style.animationDuration = duration + 's';
-            heart.style.animationDelay = Math.random() * 2 + 's'; // Delay para aparecerem em momentos diferentes
-
+            heart.style.animationDelay = Math.random() * 2 + 's'; 
             heartContainer.appendChild(heart);
-
-            // Remove o coração depois que a animação termina para evitar sobrecarga
             heart.addEventListener('animationend', () => {
                 heart.remove();
             });
         }
+        setInterval(createHeart, 500); 
 
-        // Cria um novo coração a cada 0.5 segundos (você pode ajustar este valor)
-        setInterval(createHeart, 500); // Cria um coração a cada meio segundo
+        // Script para a tela de carregamento (Preloader)
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.classList.add('hidden');
+                // Remove o preloader do DOM após a transição para liberar recursos
+                preloader.addEventListener('transitionend', () => {
+                    preloader.remove();
+                });
+            }
+        });
     </script>
 
 </body>
