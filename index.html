@@ -429,7 +429,15 @@
 
 
         /* Estilos para responsividade */
-        @media (max-width: 768px) {
+        @media (max-width: 480px) {
+    /* ... outras regras de estilo ... */
+    #main-title {
+        font-size: 1.8em; /* Reduz o tamanho da fonte para celular */
+        word-break: break-word; /* Ajuda a quebrar palavras longas se necessário */
+        /* O white-space: normal será aplicado pelo JavaScript após a digitação */
+    }
+    /* ... outras regras de estilo ... */
+}
             h1 {
                 font-size: 2em;
             }
