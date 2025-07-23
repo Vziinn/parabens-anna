@@ -655,15 +655,15 @@
                     mainTitleElement.textContent += originalTitleText.charAt(charIndex);
                     charIndex++;
                     setTimeout(typeWriter, 100); // Velocidade de digitação (ms por caractere)
-                } else {
-                    mainTitleElement.style.animation = 'typing 3.5s steps(40, end) forwards';
-                    // Inicia fadeIn dos outros elementos após o typewriter ter uma boa parte digitada
-                    document.querySelector('.subtitle').style.animationDelay = '0s'; // Já tem um atraso relativo no CSS
-                    document.querySelector('.photo').style.animationDelay = '0.2s';
-                    document.querySelector('.text').style.animationDelay = '0.4s';
-                    document.querySelector('.music-player').style.animationDelay = '0.6s';
-                    document.querySelector('.playlist').style.animationDelay = '0.8s';
-                    document.querySelector('footer').style.animationDelay = '1s';
+               } else {
+            // Após a digitação, permite que o texto quebre a linha se for celular, e remove o cursor
+            if (window.innerWidth <= 480) { // Se a largura da janela for menor ou igual a 480px (celular)
+                mainTitleElement.style.whiteSpace = 'normal'; // Permite que o texto quebre a linha
+            } 
+            mainTitleElement.style.borderRight = 'none'; // Remove o cursor
+            // A animação de digitação principal continua ativa, mas o white-space agora permite a quebra.
+            mainTitleElement.style.animation = `typing 3.5s steps(${originalTitleText.length}, end) forwards`; 
+        }
                 }
             }
 
