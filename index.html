@@ -33,7 +33,7 @@
             font-family: 'Open Sans', sans-serif; /* Fonte para o texto geral */
             color: #fff;
             text-align: center;
-            padding: 20px;
+            padding: 20px; /* Padding padrão para telas maiores */
             margin: 0;
             overflow-x: hidden; /* Evita rolagem horizontal */
             /* Garante que o conteúdo fique acima do canvas */
@@ -57,12 +57,12 @@
             font-size: 2.8em; 
             color: #ffcccc; 
             margin-bottom: 0;
-            /* A animação fadeIn foi removida daqui para dar lugar ao efeito de digitação */
+            /* A animação fadeIn foi removida daqui para dar lugar ao ao efeito de digitação */
         }
         
         /* Efeito de Digitação (Typewriter) */
         #main-title {
-            white-space: nowrap; /* Impede que o texto quebre linha */
+            white-space: nowrap; /* Impede que o texto quebre linha DURANTE a digitação */
             overflow: hidden; /* Esconde o texto que ainda não foi digitado */
             border-right: .15em solid #ffcccc; /* O "cursor" piscante */
             animation: 
@@ -77,7 +77,7 @@
         /* Animação de digitação */
         @keyframes typing {
             from { width: 0; }
-            to { width: 100%; } /* Ajustado pelo JS */
+            to { width: 100%; } /* Ajustado pelo JS, mas a remoção do nowrap é a chave */
         }
 
         /* Animação do cursor piscante */
@@ -335,7 +335,7 @@
             100% { opacity: 1; transform: scale(1); } /* Volta ao tamanho normal */
         }
 
-        /* Estilos para a Abertura do Presente (NOVO) */
+        /* Estilos para a Abertura do Presente */
         #gift-box-wrapper {
             position: fixed;
             top: 0;
@@ -413,371 +413,4 @@
         #open-gift-btn {
             background-color: #ff6666; /* Rosa mais forte */
             color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1em;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        #open-gift-btn:hover {
-            background-color: #ff3333;
-            transform: translateY(-2px);
-        }
-
-
-        /* Estilos para responsividade */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
-            }
-            .subtitle {
-                font-size: 1em;
-            }
-            .text, .playlist, .music-player {
-                padding: 15px;
-            }
-            .photo {
-                max-width: 250px;
-            }
-            #scrollToTopBtn {
-                padding: 12px;
-                font-size: 16px;
-                bottom: 15px;
-                right: 15px;
-            }
-            .spinner-heart {
-                font-size: 40px; /* Menor em telas pequenas */
-            }
-            #intro-text {
-                font-size: 2.5em; /* Menor em telas pequenas */
-            }
-            .gift-box {
-                width: 250px;
-                height: 200px;
-            }
-            .gift-text {
-                font-size: 1.2em;
-            }
-            #open-gift-btn {
-                padding: 10px 20px;
-                font-size: 1em;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <canvas id="star-canvas"></canvas>
-
-    <div id="gift-box-wrapper">
-        <div class="gift-box">
-            <div class="box-lid"></div>
-            <div class="box-base">
-                <p class="gift-text">Um presente especial para você!</p>
-                <button id="open-gift-btn">Abrir Presente</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="cinematic-intro">
-        <span id="intro-text">Feliz Aniversário, Anna!</span>
-    </div>
-
-    <div id="preloader">
-        <span class="spinner-heart">❤️</span>
-    </div>
-
-    <div class="heart-container"></div>
-
-    <h1 id="main-title"></h1>
-
-    <p class="subtitle">Feliz 16 anos!</p>
-
-    <img src="anna_foto.jpeg" alt="Foto da Anna" class="photo">
-
-    <div class="text">
-        <p>Anna,</p>
-
-        <p>Hoje você completa 16 anos — uma idade que marca o início de tantos sonhos, escolhas e descobertas que vão moldar a sua vida. E eu não podia deixar passar essa data tão importante sem abrir meu coração para você.</p>
-
-        <p>Quero que você saiba que, mesmo com todas as voltas que a vida deu, mesmo com o silêncio e as distâncias, meu amor por você nunca diminuiu. Ele ficou guardado aqui, firme, silencioso, esperando o momento certo para ser sentido.</p>
-
-        <p>Eu me importo com você de uma forma que talvez você nem imagine. Me preocupo com seus passos, com seus sorrisos, com suas dores escondidas, e com quem você está ao seu lado. Por isso, mesmo quando você se afastou, eu permaneci aqui, porque o que eu sinto é verdadeiro.</p>
-
-        <p>Sei que você esqueceu do meu aniversário, dia 23 de junho, mas ontem, quando comentei com você, recebi seu pedido de desculpas e uma mensagem linda de parabéns — e isso significou muito para mim. Porque, apesar de tudo, você se importou em reconhecer e se desculpar. Isso mostra que, no fundo, existe um respeito e um carinho, mesmo que as coisas tenham sido difíceis.</p>
-
-        <p>Quero que saiba também que eu sempre te perdoei. Mesmo quando você não acreditava nisso, mesmo quando parecia que o nosso caminho ia se perder, eu segurei o perdão dentro do meu peito. Porque amar também é perdoar. É querer o bem da pessoa, mesmo quando ela não faz fácil.</p>
-
-        <p>Sei que houve momentos em que você negou o que sentia, talvez com medo de que algo mudasse entre nós — medo de que o que pudesse surgir acabasse estragando uma amizade que, pra mim, sempre foi preciosa. Mas eu sempre entendi que o coração às vezes precisa de tempo, espaço e coragem para se revelar.</p>
-
-        <p>Você pode até não perceber, mas você sempre foi especial pra mim. E não falo só de gostar ou amar no sentido romântico — falo de querer o melhor para você, de querer que seja feliz de verdade, que se ame e que escolha caminhos que te valorizem.</p>
-
-        <p>Eu sei que a vida pode ser confusa, que às vezes parece que ninguém entende a gente, e que as opiniões dos outros podem bagunçar o que sentimos. Mas eu queria que você tivesse a coragem de olhar para dentro e ver a pessoa incrível que você é — e também para perceber que tem alguém que sempre estará aqui para te lembrar disso.</p>
-
-        <p>Obrigada por existir e por, mesmo sem querer, ter conquistado um lugar tão importante no meu coração.</p>
-
-        <p>Parabéns pelos seus 16 anos, Anna. Que seu caminho seja iluminado, e que você nunca esqueça o quanto é especial para mim.</p>
-
-        <p>Com todo o meu amor,<br>Paulo Vinicius</p>
-    </div>
-
-    <div class="music-player">
-        <p>🎵 Uma música para você:</p>
-        <audio controls autoplay muted loop>
-            <source src="e_amor.mp3" type="audio/mpeg">
-            Seu navegador não suporta a tag de áudio.
-        </audio>
-        <p style="font-size: 0.8em; color: #666; margin-top: 5px;">(Clique no controle de volume para desmutar)</p>
-    </div>
-
-    <div class="playlist">
-        <p>Outras músicas que me lembram você:</p>
-        <iframe <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6ccKu0LwJzOhLAxBwP2PTk?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-
-    <footer>
-        <p>Criação especial para Anna. Sinta-se abraçada! 💛</p>
-    </footer>
-
-    <button onclick="topFunction()" id="scrollToTopBtn" title="Voltar ao Topo">⬆️</button>
-
-    <script>
-        // Script para o botão "Voltar ao Topo"
-        let mybutton = document.getElementById("scrollToTopBtn");
-        window.onscroll = function() {scrollFunction()};
-
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                mybutton.style.display = "block";
-            } else {
-                mybutton.style.display = "none";
-            }
-        }
-        function topFunction() {
-            window.scrollTo({top: 0, behavior: 'smooth'}); 
-        }
-
-        // Script para os corações flutuantes
-        const heartContainer = document.querySelector('.heart-container');
-        let heartsInterval;
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            const size = Math.random() * 20 + 10; 
-            heart.style.width = size + 'px';
-            heart.style.height = size + 'px';
-            heart.style.left = Math.random() * 100 + 'vw';
-            const duration = Math.random() * 8 + 8; 
-            heart.style.animationDuration = duration + 's';
-            heart.style.animationDelay = Math.random() * 2 + 's'; 
-            heartContainer.appendChild(heart);
-            heart.addEventListener('animationend', () => {
-                heart.remove();
-            });
-        }
-        function startHearts() {
-            if (!heartsInterval) { // Garante que o intervalo só é criado uma vez
-                heartsInterval = setInterval(createHeart, 500); 
-            }
-        }
-
-        // Script para a Abertura do Presente, Entrada Cinematográfica, Preloader e Efeito de Digitação
-        window.addEventListener('load', () => {
-            const giftBoxWrapper = document.getElementById('gift-box-wrapper');
-            const openGiftBtn = document.getElementById('open-gift-btn');
-            const giftBox = document.querySelector('.gift-box');
-            const cinematicIntro = document.getElementById('cinematic-intro');
-            const preloader = document.getElementById('preloader');
-            const mainTitleElement = document.getElementById('main-title');
-            const originalTitleText = 'Para Anna – Com todo o meu amor'; 
-            let charIndex = 0;
-
-            // Inicia tudo escondido, exceto a caixa de presente
-            cinematicIntro.style.display = 'none';
-            preloader.style.display = 'none';
-            document.body.style.overflow = 'hidden'; // Impede rolagem enquanto nas intros
-
-            openGiftBtn.addEventListener('click', () => {
-                giftBox.classList.add('open'); // Aciona a animação de abrir a tampa
-                
-                // Remove a caixa de presente após a animação e inicia a próxima etapa
-                giftBox.addEventListener('transitionend', () => {
-                    if (giftBoxWrapper && !giftBoxWrapper.classList.contains('hidden')) { // Garante que só execute uma vez
-                        giftBoxWrapper.classList.add('hidden');
-                        giftBoxWrapper.addEventListener('transitionend', () => {
-                            giftBoxWrapper.remove(); // Remove do DOM
-                            startCinematicIntro(); // Inicia a próxima sequência
-                        }, { once: true });
-                    }
-                }, { once: true });
-            });
-
-            // Inicia a Entrada Cinematográfica
-            function startCinematicIntro() {
-                cinematicIntro.style.display = 'flex'; // Mostra a intro
-                setTimeout(() => {
-                    cinematicIntro.classList.add('hidden');
-                    cinematicIntro.addEventListener('transitionend', () => {
-                        cinematicIntro.remove();
-                        startPreloader(); // Inicia o preloader
-                    }, { once: true });
-                }, 3000); // Duração da animação da entrada cinematográfica antes de sumir
-            }
-
-            // Inicia o Preloader
-            function startPreloader() {
-                preloader.style.display = 'flex'; // Mostra o preloader
-                setTimeout(() => { // Pequeno delay antes de esconder o preloader
-                    preloader.classList.add('hidden');
-                    preloader.addEventListener('transitionend', () => {
-                        preloader.remove();
-                        document.body.style.overflow = ''; // Libera a rolagem
-                        startTypewriter(); // Inicia o efeito de digitação
-                        setTimeout(startHearts, 1000); // Inicia os corações
-                    }, { once: true });
-                }, 1500); // Tempo do preloader (1.5 segundos)
-            }
-
-            // Efeito de Digitação (Typewriter)
-            function typeWriter() {
-                if (charIndex < originalTitleText.length) {
-                    mainTitleElement.textContent += originalTitleText.charAt(charIndex);
-                    charIndex++;
-                    setTimeout(typeWriter, 100); // Velocidade de digitação (ms por caractere)
-                } else {
-                    mainTitleElement.style.animation = 'typing 3.5s steps(40, end) forwards';
-                    // Inicia fadeIn dos outros elementos após o typewriter ter uma boa parte digitada
-                    document.querySelector('.subtitle').style.animationDelay = '0s'; // Já tem um atraso relativo no CSS
-                    document.querySelector('.photo').style.animationDelay = '0.2s';
-                    document.querySelector('.text').style.animationDelay = '0.4s';
-                    document.querySelector('.music-player').style.animationDelay = '0.6s';
-                    document.querySelector('.playlist').style.animationDelay = '0.8s';
-                    document.querySelector('footer').style.animationDelay = '1s';
-                }
-            }
-
-            function startTypewriter() {
-                mainTitleElement.textContent = ''; 
-                charIndex = 0;
-                typeWriter(); 
-            }
-        });
-
-        // Script para o Campo de Estrelas Interativo (Canvas)
-        const canvas = document.getElementById('star-canvas');
-        const ctx = canvas.getContext('2d');
-        let stars = [];
-        let mouse = { x: undefined, y: undefined };
-        const particleCount = 100; // Número de estrelas de fundo
-        const clickParticleCount = 30; // Número de partículas ao clicar
-
-        // Ajusta o tamanho do canvas com a janela
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            createStars(); // Recria as estrelas para o novo tamanho
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas(); // Chama no início
-
-        // Estrela / Partícula
-        class Star {
-            constructor(x, y, radius, color, velocity) {
-                this.x = x;
-                this.y = y;
-                this.radius = radius;
-                this.color = color;
-                this.velocity = velocity;
-                this.alpha = 1; // Opacidade inicial
-            }
-
-            draw() {
-                ctx.save();
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-                ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.alpha})`;
-                ctx.shadowBlur = this.radius * 2;
-                ctx.shadowColor = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.alpha * 0.8})`;
-                ctx.fill();
-                ctx.restore();
-            }
-
-            update() {
-                this.x += this.velocity.x;
-                this.y += this.velocity.y;
-                // Fade out se for uma partícula de clique ou rastro do mouse
-                if (this.isTransient) {
-                    this.alpha -= 0.02;
-                    if (this.alpha <= 0) {
-                        this.radius = 0; // Desaparece
-                    }
-                }
-            }
-        }
-
-        // Cria as estrelas de fundo
-        function createStars() {
-            stars = [];
-            for (let i = 0; i < particleCount; i++) {
-                const radius = Math.random() * 1.5 + 0.5; // Tamanho pequeno
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                const color = { r: 255, g: 255, b: 255 }; // Estrelas brancas
-                const velocity = { x: (Math.random() - 0.5) * 0.1, y: (Math.random() - 0.5) * 0.1 }; // Movimento lento
-                stars.push(new Star(x, y, radius, color, velocity));
-            }
-        }
-
-        // Adiciona rastro no mouse
-        canvas.addEventListener('mousemove', (event) => {
-            mouse.x = event.clientX;
-            mouse.y = event.clientY;
-            // Adiciona algumas estrelas pequenas no rastro do mouse
-            for (let i = 0; i < 2; i++) {
-                const radius = Math.random() * 1 + 0.2;
-                const color = { r: 255, g: 220, b: 230 }; // Rosa claro
-                const velocity = { x: (Math.random() - 0.5) * 1, y: (Math.random() - 0.5) * 1 };
-                const star = new Star(mouse.x + Math.random() * 10 - 5, mouse.y + Math.random() * 10 - 5, radius, color, velocity);
-                star.isTransient = true; // Marca como transitório para desaparecer
-                stars.push(star);
-            }
-        });
-
-        // Adiciona explosão de brilhos ao clicar
-        canvas.addEventListener('click', (event) => {
-            for (let i = 0; i < clickParticleCount; i++) {
-                const radius = Math.random() * 2 + 1;
-                const color = { r: 255, g: Math.floor(Math.random() * 100) + 150, b: Math.floor(Math.random() * 100) + 150 }; // Tons de rosa/dourado
-                const angle = Math.random() * Math.PI * 2;
-                const velocity = {
-                    x: Math.cos(angle) * (Math.random() * 5 + 2),
-                    y: Math.sin(angle) * (Math.random() * 5 + 2)
-                };
-                const star = new Star(event.clientX, event.clientY, radius, color, velocity);
-                star.isTransient = true; // Marca como transitório para desaparecer
-                stars.push(star);
-            }
-        });
-
-        // Loop de animação do Canvas
-        function animateStars() {
-            requestAnimationFrame(animateStars);
-            ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpa o canvas a cada frame
-            // Define um alpha baixo para o ctx.fillStyle para criar um rastro sutil das estrelas antigas
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; 
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Filtra e desenha as estrelas
-            stars = stars.filter(star => star.radius > 0); // Remove estrelas que desapareceram
-            stars.forEach(star => {
-                star.update();
-                star.draw();
-            });
-        }
-        animateStars();
-    </script>
-
-</body>
-</html>
+            padding
