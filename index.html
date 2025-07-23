@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -124,26 +123,84 @@
 
         /* Estilos para o botão "Voltar ao Topo" */
         #scrollToTopBtn {
-            display: none; /* Escondido por padrão */
-            position: fixed; /* Fixado na tela */
-            bottom: 20px; /* Distância do fundo */
-            right: 20px; /* Distância da direita */
-            z-index: 99; /* Acima de outros elementos */
-            border: none; /* Remove a borda */
-            outline: none; /* Remove o contorno ao focar */
-            background-color: rgba(255, 204, 204, 0.7); /* Rosa claro semi-transparente */
-            color: white; /* Cor da seta */
-            cursor: pointer; /* Cursor de clique */
-            padding: 15px; /* Espaçamento interno */
-            border-radius: 50%; /* Torna o botão redondo */
-            font-size: 18px; /* Tamanho da seta */
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2); /* Sombra */
-            transition: background-color 0.3s ease, transform 0.3s ease; /* Transição para hover */
+            display: none; 
+            position: fixed; 
+            bottom: 20px; 
+            right: 20px; 
+            z-index: 99; 
+            border: none; 
+            outline: none; 
+            background-color: rgba(255, 204, 204, 0.7); 
+            color: white; 
+            cursor: pointer; 
+            padding: 15px; 
+            border-radius: 50%; 
+            font-size: 18px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2); 
+            transition: background-color 0.3s ease, transform 0.3s ease; 
         }
 
         #scrollToTopBtn:hover {
-            background-color: rgba(255, 153, 153, 0.9); /* Rosa mais escuro no hover */
-            transform: translateY(-3px); /* Leve levantamento no hover */
+            background-color: rgba(255, 153, 153, 0.9); 
+            transform: translateY(-3px); 
+        }
+
+        /* Estilos para os corações flutuantes */
+        .heart-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Permite clicar nos elementos por baixo */
+            overflow: hidden; /* Garante que os corações não saiam da tela antes de sumir */
+            z-index: -1; /* Fica abaixo de todo o conteúdo */
+        }
+
+        .heart {
+            position: absolute;
+            background-color: #ffcccc; /* Cor rosa claro */
+            animation: floatUp 10s linear infinite; /* Animação principal */
+            opacity: 0; /* Começa invisível */
+            transform: scale(0); /* Começa pequeno */
+        }
+        
+        /* Formato do coração (CSS puro) */
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: inherit; /* Herda a cor do .heart */
+            border-radius: 50% 50% 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        /* Animação para os corações subirem e sumirem */
+        @keyframes floatUp {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0); /* Começa lá embaixo, pequeno */
+            }
+            10% {
+                opacity: 0.8;
+                transform: translateY(90vh) scale(1); /* Fica visível e no tamanho normal */
+            }
+            80% {
+                opacity: 0.8;
+                transform: translateY(20vh) scale(1); /* Sobe */
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-10vh) scale(0); /* Sobe para fora da tela e desaparece */
+            }
         }
 
         /* Estilos para responsividade */
@@ -171,6 +228,8 @@
 </head>
 <body>
 
+    <div class="heart-container"></div>
+
     <h1>Para Anna – Com todo o meu amor</h1>
     <p class="subtitle">Feliz 16 anos!</p>
 
@@ -191,11 +250,9 @@
 
         <p>Sei que houve momentos em que você negou o que sentia, talvez com medo de que algo mudasse entre nós — medo de que o que pudesse surgir acabasse estragando uma amizade que, pra mim, sempre foi preciosa. Mas eu sempre entendi que o coração às vezes precisa de tempo, espaço e coragem para se revelar.</p>
 
-        <p>Você pode até não perceber, mas você sempre foi especial pra mim. E não falo só de gostar ou amar no sentido romântico — falo de querer o melhor para você, de querer que você seja feliz de verdade, que se ame e que escolha caminhos que te valorizem.</p>
+        <p>Você pode até não perceber, mas você sempre foi especial pra mim. E não falo só de gostar ou amar no sentido romântico — falo de querer o melhor para você, de querer que seja feliz de verdade, que se ame e que escolha caminhos que te valorizem.</p>
 
         <p>Eu sei que a vida pode ser confusa, que às vezes parece que ninguém entende a gente, e que as opiniões dos outros podem bagunçar o que sentimos. Mas eu queria que você tivesse a coragem de olhar para dentro e ver a pessoa incrível que você é — e também para perceber que tem alguém que sempre estará aqui para te lembrar disso.</p>
-
-        <p>Nesse seu aniversário, meu maior desejo é que você encontre forças para se valorizar, para se proteger e para se amar como merece. Que você entenda que o amor que eu tenho por você não é apenas um sentimento, mas um compromisso silencioso de estar aqui, torcendo por você, acreditando em você, mesmo de longe.</p>
 
         <p>Obrigada por existir e por, mesmo sem querer, ter conquistado um lugar tão importante no meu coração.</p>
 
@@ -243,7 +300,40 @@
         function topFunction() {
             window.scrollTo({top: 0, behavior: 'smooth'}); // Rola suavemente
         }
+
+        // Script para os corações flutuantes
+        const heartContainer = document.querySelector('.heart-container');
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            
+            // Tamanho aleatório para variar um pouco
+            const size = Math.random() * 20 + 10; // Corações de 10px a 30px
+            heart.style.width = size + 'px';
+            heart.style.height = size + 'px';
+            
+            // Posição inicial aleatória na largura da tela
+            heart.style.left = Math.random() * 100 + 'vw';
+            
+            // Duração e delay da animação aleatórios para parecer mais natural
+            const duration = Math.random() * 8 + 8; // De 8 a 16 segundos
+            heart.style.animationDuration = duration + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's'; // Delay para aparecerem em momentos diferentes
+
+            heartContainer.appendChild(heart);
+
+            // Remove o coração depois que a animação termina para evitar sobrecarga
+            heart.addEventListener('animationend', () => {
+                heart.remove();
+            });
+        }
+
+        // Cria um novo coração a cada 0.5 segundos (você pode ajustar este valor)
+        setInterval(createHeart, 500); // Cria um coração a cada meio segundo
     </script>
 
 </body>
 </html>
+
+  
