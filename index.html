@@ -18,7 +18,7 @@
     <link href="http://googleusercontent.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Animação de Fade-in */
+        /* Animação de Fade-in (para outros elementos) */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -42,14 +42,43 @@
             font-size: 2.8em; 
             color: #ffcccc; 
             margin-bottom: 0;
-            animation: fadeIn 1s ease-out forwards; 
+            /* A animação fadeIn foi removida daqui para dar lugar ao efeito de digitação */
         }
+        
+        /* Efeito de Digitação (Typewriter) */
+        #main-title {
+            white-space: nowrap; /* Impede que o texto quebre linha */
+            overflow: hidden; /* Esconde o texto que ainda não foi digitado */
+            border-right: .15em solid #ffcccc; /* O "cursor" piscante */
+            animation: 
+                typing 3.5s steps(40, end), /* Ajuste a duração (3.5s) e steps (40) para a velocidade */
+                blink-caret .75s step-end infinite;
+            width: 0; /* Começa com largura zero, o JS ajusta */
+            display: inline-block; /* Para o efeito de cursor funcionar */
+            animation-fill-mode: forwards; /* Mantém o estado final da animação */
+            vertical-align: middle; /* Alinha o cursor com o texto */
+        }
+
+        /* Animação de digitação */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; } /* Ajustado pelo JS */
+        }
+
+        /* Animação do cursor piscante */
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #ffcccc; }
+        }
+
+        /* Ajustes para outros elementos aparecerem após o título */
         .subtitle {
             font-family: 'Playfair Display', serif; /* Fonte para o subtítulo */
             font-size: 1.4em; 
             color: #ff9999; 
             margin-top: 5px;
-            animation: fadeIn 1s ease-out 0.2s forwards; 
+            opacity: 0; /* Começa invisível */
+            animation: fadeIn 1s ease-out 4s forwards; /* Atraso para aparecer depois do título */
         }
         .photo {
             max-width: 300px;
@@ -59,12 +88,13 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             margin: 20px auto;
             display: block;
-            animation: fadeIn 1s ease-out 0.4s forwards; 
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição para hover */
+            opacity: 0; /* Começa invisível */
+            animation: fadeIn 1s ease-out 4.2s forwards; /* Atraso */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
         }
         .photo:hover {
-            transform: translateY(-5px); /* Leve levantamento no hover */
-            box-shadow: 0 8px 15px rgba(0,0,0,0.5); /* Sombra mais forte no hover */
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.5); 
         }
         .text {
             text-align: left;
@@ -76,13 +106,14 @@
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
             color: #eee;
-            animation: fadeIn 1s ease-out 0.6s forwards; 
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; /* Transição para hover */
+            opacity: 0; /* Começa invisível */
+            animation: fadeIn 1s ease-out 4.4s forwards; /* Atraso */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; 
         }
         .text:hover {
-            transform: translateY(-5px); /* Leve levantamento no hover */
-            box-shadow: 0 8px 15px rgba(0,0,0,0.3); /* Sombra mais forte no hover */
-            background: rgba(255, 255, 255, 0.25); /* Fundo ligeiramente mais opaco */
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3); 
+            background: rgba(255, 255, 255, 0.25); 
         }
         .music-player {
             margin: 30px auto;
@@ -96,13 +127,14 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 10px;
-            animation: fadeIn 1s ease-out 0.8s forwards; 
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; /* Transição para hover */
+            opacity: 0; /* Começa invisível */
+            animation: fadeIn 1s ease-out 4.6s forwards; /* Atraso */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; 
         }
         .music-player:hover {
-            transform: translateY(-5px); /* Leve levantamento no hover */
-            box-shadow: 0 8px 15px rgba(0,0,0,0.3); /* Sombra mais forte no hover */
-            background: rgba(255, 255, 255, 0.25); /* Fundo ligeiramente mais opaco */
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3); 
+            background: rgba(255, 255, 255, 0.25); 
         }
         .playlist {
             margin: 30px auto;
@@ -112,20 +144,22 @@
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
             color: #eee;
-            animation: fadeIn 1s ease-out 1s forwards; 
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; /* Transição para hover */
+            opacity: 0; /* Começa invisível */
+            animation: fadeIn 1s ease-out 4.8s forwards; /* Atraso */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; 
         }
         .playlist:hover {
-            transform: translateY(-5px); /* Leve levantamento no hover */
-            box-shadow: 0 8px 15px rgba(0,0,0,0.3); /* Sombra mais forte no hover */
-            background: rgba(255, 255, 255, 0.25); /* Fundo ligeiramente mais opaco */
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3); 
+            background: rgba(255, 255, 255, 0.25); 
         }
         footer {
             margin-top: 50px;
             font-size: 0.9em;
             color: #ccc;
+            opacity: 0; /* Começa invisível */
+            animation: fadeIn 1s ease-out 5s forwards; /* Atraso */
             padding-bottom: 20px;
-            animation: fadeIn 1s ease-out 1.2s forwards; 
         }
 
         /* Estilos para o botão "Voltar ao Topo" */
@@ -282,7 +316,8 @@
 
     <div class="heart-container"></div>
 
-    <h1>Para Anna – Com todo o meu amor</h1>
+    <h1 id="main-title"></h1>
+
     <p class="subtitle">Feliz 16 anos!</p>
 
     <img src="anna_foto.jpeg" alt="Foto da Anna" class="photo">
@@ -325,6 +360,7 @@
     <div class="playlist">
         <p>Outras músicas que me lembram você:</p>
         <iframe <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6ccKu0LwJzOhLAxBwP2PTk?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
 
     <footer>
         <p>Criação especial para Anna. Sinta-se abraçada! 💛</p>
@@ -365,19 +401,55 @@
                 heart.remove();
             });
         }
-        setInterval(createHeart, 500); 
+        // Inicia a criação de corações depois que o preloader sumir e o título terminar de digitar
+        setTimeout(() => {
+            setInterval(createHeart, 500); 
+        }, 5500); // Começa 5.5 segundos após o carregamento da página
 
-        // Script para a tela de carregamento (Preloader)
+        // Script para a tela de carregamento (Preloader) e início do efeito de digitação
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
             if (preloader) {
                 preloader.classList.add('hidden');
-                // Remove o preloader do DOM após a transição para liberar recursos
                 preloader.addEventListener('transitionend', () => {
                     preloader.remove();
+                    // Inicia o efeito de digitação APÓS o preloader sumir
+                    startTypewriter(); 
                 });
+            } else {
+                // Caso o preloader não exista por algum motivo, inicia direto
+                startTypewriter();
             }
         });
+
+        // Efeito de Digitação (Typewriter)
+        const mainTitleElement = document.getElementById('main-title');
+        const originalTitleText = 'Para Anna – Com todo o meu amor'; 
+        let charIndex = 0;
+        let isTypingComplete = false;
+
+        function typeWriter() {
+            if (charIndex < originalTitleText.length) {
+                mainTitleElement.textContent += originalTitleText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 100); // Velocidade de digitação (ms por caractere)
+            } else {
+                isTypingComplete = true;
+                // Remove a animação de piscar do cursor após a digitação
+                mainTitleElement.style.animation = 'typing 3.5s steps(40, end) forwards';
+            }
+        }
+
+        function startTypewriter() {
+            // Garante que o título esteja vazio antes de começar a digitar
+            mainTitleElement.textContent = ''; 
+            charIndex = 0;
+            isTypingComplete = false;
+            typeWriter(); // Inicia a digitação
+        }
+
+        // Ajusta o início das animações de fadeIn para os outros elementos
+        // Elas já estão com delay no CSS, mas o início será após o preloader/typewriter
     </script>
 
 </body>
