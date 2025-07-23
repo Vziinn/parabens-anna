@@ -41,16 +41,7 @@
             z-index: 1; 
         }
 
-        /* Canvas para as estrelas interativas */
-        #star-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2; /* Atrás do container de corações (-1) */
-            pointer-events: none; /* Permite interagir com elementos por cima */
-        }
+        /* Removido o CSS para #star-canvas e .heart-container */
 
         h1 {
             font-family: 'Playfair Display', serif; /* Fonte para o título principal */
@@ -201,63 +192,7 @@
             transform: translateY(-3px); 
         }
 
-        /* Estilos para os corações flutuantes */
-        .heart-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none; /* Permite clicar nos elementos por baixo */
-            overflow: hidden; /* Garante que os corações não saiam da tela antes de sumir */
-            z-index: -1; /* Fica abaixo de todo o conteúdo */
-        }
-
-        .heart {
-            position: absolute;
-            background-color: #ffcccc; /* Cor rosa claro */
-            animation: floatUp 10s linear infinite; /* Animação principal */
-            opacity: 0; /* Começa invisível */
-            transform: scale(0); /* Começa pequeno */
-        }
-        
-        /* Formato do coração (CSS puro) */
-        .heart::before,
-        .heart::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: inherit; /* Herda a cor do .heart */
-            border-radius: 50% 50% 0 0;
-            transform: rotate(-45deg);
-            transform-origin: 0 100%;
-        }
-        .heart::after {
-            left: 0;
-            transform: rotate(45deg);
-            transform-origin: 100% 100%;
-        }
-
-        /* Animação para os corações subirem e sumirem */
-        @keyframes floatUp {
-            0% {
-                opacity: 0;
-                transform: translateY(100vh) scale(0); /* Começa lá embaixo, pequeno */
-            }
-            10% {
-                opacity: 0.8;
-                transform: translateY(90vh) scale(1); /* Fica visível e no tamanho normal */
-            }
-            80% {
-                opacity: 0.8;
-                transform: translateY(20vh) scale(1); /* Sobe */
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-10vh) scale(0); /* Sobe para fora da tela e desaparece */
-            }
-        }
+        /* Removido o CSS para corações flutuantes */
 
         /* Preloader */
         #preloader {
@@ -413,4 +348,73 @@
         #open-gift-btn {
             background-color: #ff6666; /* Rosa mais forte */
             color: white;
-            padding
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        #open-gift-btn:hover {
+            background-color: #ff3333;
+            transform: translateY(-2px);
+        }
+
+
+        /* Estilos para responsividade (telefones e tablets) */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .subtitle {
+                font-size: 1em;
+            }
+            .text, .playlist, .music-player {
+                padding: 15px;
+            }
+            .photo {
+                max-width: 250px;
+            }
+            #scrollToTopBtn {
+                padding: 12px;
+                font-size: 16px;
+                bottom: 15px;
+                right: 15px;
+            }
+            .spinner-heart {
+                font-size: 40px; /* Menor em telas pequenas */
+            }
+            #intro-text {
+                font-size: 2.5em; /* Menor em telas pequenas */
+            }
+            .gift-box {
+                width: 250px;
+                height: 200px;
+            }
+            .gift-text {
+                font-size: 1.2em;
+            }
+            #open-gift-btn {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+
+        /* Estilos para responsividade em celulares MUITO pequenos (NOVO) */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px; /* Reduz o padding lateral para telas muito pequenas */
+            }
+            h1 {
+                font-size: 1.8em; /* Um pouco menor para telas super pequenas */
+            }
+            .subtitle {
+                font-size: 0.9em;
+            }
+            #intro-text {
+                font-size: 2em; /* Menor ainda para a intro cinematográfica */
+            }
+            .spinner-heart {
+                font-size: 30px; /* Men
